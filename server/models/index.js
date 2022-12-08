@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const Sequelize = require("sequelize");
-const config = require(__dirname + "/../config/config.json")[env];
+const Sequelize = require('sequelize');
+const config = require(__dirname + '/../config/config.json')['development'];
 
 const db = {};
-let sequelize = new Sequelize(
+const sequelize = new Sequelize(
   config.database,
   config.username,
   config.password,
@@ -14,11 +14,11 @@ let sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-// db = { "sequelize": sequelize, "Sequelize": Sequelize}
+// db = { "sequelize" : sequelize, "Sequelize": Sequelize }
 
-db.Todo = require('./Todo') 
-// db = { "sequelize": sequelize, "Sequelize": Sequelize, "Todo": model}
-// model: models/Todo.js에서 Todo가 반환하고 있는 model
+db.Todo = require('./Todo')(sequelize, Sequelize);
+// db = { "sequelize" : sequelize, "Sequelize": Sequelize, "Todo": model }
+// model: models/Todo.js에서 Todo가 반환하고 있는 model이 db.Todo에 들어감
 
 module.exports = db;
 // db 객체를 내보냄
