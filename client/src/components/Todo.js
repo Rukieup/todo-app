@@ -12,7 +12,7 @@ const Todo = ({ todo }) => {
         id={`todo${id}`}
         name={`todo${id}`}
         value={`todo${id}`}
-        defaultChecked={`todo${done}`}
+        defaultChecked={todo.done}
       />
       <label htmlFor={`todo${id}`}>{title}</label>
     </div>
