@@ -3,9 +3,39 @@
 // 3. App (부모 컴포넌트)에서 Todo(자식 컴포넌트) 1개를 렌더링
 import { useState } from "react";
 
-const Todo = ({ todo , deleteItem }) => {
-  const { id, title, done} = todo;
-  const [todoItem, setTodoItem] = useState(todo)
+const Todo = ({ todo, deleteItem }) => {
+  const { id, title, done } = todo;
+  const [todoItem, setTodoItem] = useState(todo);
+  const [readOnly, setReadOnly] = useState(true);
+
+  const onInputClick = (e) => {
+    setReadOnly(false)
+  };
+
+  const editEventHandler = (e) => {
+    // e.target.readOnly = false;
+    const { title, ...rest } = todoItem;
+
+    setTodoItem({
+      title: e.target.value,
+      ...rest,
+    })
+  };
+
+  const enterKeyEventHandler = (e) => {
+    if (e.key === "Enter") {
+      setReadOnly(true)
+    }
+  }
+
+  const editDone = (e) => {
+    const {done, ...rest} = todoItem;
+
+    setTodoItem({
+      done: !todoItem.done,
+      ...rest,
+    })
+  }
 
   return (
     <div className="Todo">
@@ -15,8 +45,17 @@ const Todo = ({ todo , deleteItem }) => {
         name={`todo${id}`}
         value={`todo${id}`}
         defaultChecked={todo.done}
+        onClick={editDone}
       />
-      <label htmlFor={`todo${id}`}>{title}</label>
+      {/* <label htmlFor={`todo${id}`}>{title}</label> */}
+      <input
+        type="text"
+        value={todoItem.title}
+        onClick={onInputClick}
+        readOnly={readOnly}
+        onChange={editEventHandler}
+        onKeyPress={enterKeyEventHandler}
+      />
       <button onClick={() => deleteItem(todoItem)}>Delete</button>
     </div>
   );

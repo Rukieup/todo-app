@@ -41,6 +41,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <h2>✨My Todo App</h2>
       <AddTodo addItem={addItem} />
 
       {todoitems.map((todo) => {
