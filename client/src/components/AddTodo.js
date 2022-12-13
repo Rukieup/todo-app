@@ -6,7 +6,6 @@ const AddTodo = ({ addItem }) => {
 
   const onButtonClick = () => {
     //props로 받아온 addItem 함수 실행
-    // if ()
     addItem(todoItem);
     setTodoItem({title: ''}) // input 초기화
   };

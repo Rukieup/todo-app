@@ -27,20 +27,28 @@ const App = () => {
     newItem.done = false; // done 초기화
     // 기존 todoitems를 유지하고, 새로운 newItem 추가
     setTodoitems([...todoitems, newItem]) 
-
-    // newItem = {
-    //   id: Object.keys(todoItem).length + 1,
-    //   title: todoItem.title,
-    //   done: false,
-    // };
   };
+
+  // const deleteTodo = (id) => {
+  //   const result = todoitems.filter((a) => a.id !== id)
+  //   setTodoitems(result)
+  // }
+
+  const deleteItem = (targetItem) => {
+    const newTodoItems = todoitems.filter((a) => a.id !== targetItem.id)
+    setTodoitems(newTodoItems)
+  }
 
   return (
     <div className="App">
       <AddTodo addItem={addItem} />
 
-      {todoitems.map((todo, idx) => {
-        return <Todo key={idx} todo={todo} />;
+      {todoitems.map((todo) => {
+        return (
+          <>
+          <Todo key={todo.id} todo={todo} deleteItem={deleteItem} />
+          </>
+        )
       })}
     </div>
   );
