@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import Todo from "./components/Todo";
 import AddTodo from "./components/AddTodo";
+import "./styles/App.scss";
 
 const App = () => {
-  const [todoitems, setTodoitems] = useState([
+  const [todoItems, setTodoItems] = useState([
     {
       id: 1,
       title: "My Todo1",
@@ -26,7 +27,7 @@ const App = () => {
     newItem.id = todoId.current++; // key를 위한 id 설정
     newItem.done = false; // done 초기화
     // 기존 todoitems를 유지하고, 새로운 newItem 추가
-    setTodoitems([...todoitems, newItem]) 
+    setTodoItems([...todoItems, newItem]) 
   };
 
   // const deleteTodo = (id) => {
@@ -35,22 +36,24 @@ const App = () => {
   // }
 
   const deleteItem = (targetItem) => {
-    const newTodoItems = todoitems.filter((a) => a.id !== targetItem.id)
-    setTodoitems(newTodoItems)
+    const newTodoItems = todoItems.filter((a) => a.id !== targetItem.id)
+    setTodoItems(newTodoItems)
   }
 
   return (
     <div className="App">
-      <h2>✨My Todo App</h2>
-      <AddTodo addItem={addItem} />
+      <header>✨My Todo App</header>
+      <AddTodo addItem={addItem}/>
+      <div className="left-todos">🎀{todoItems.length} Todos</div>
 
-      {todoitems.map((todo) => {
-        return (
-          <>
-          <Todo key={todo.id} todo={todo} deleteItem={deleteItem} />
-          </>
-        )
-      })}
+      {todoItems.length > 0 ? (
+        todoItems.map((todo) => {
+          // console.log(item); // {id: 1, title: 'My Todo1', done: false}
+          return <Todo key={todo.id} todo={todo} deleteItem={deleteItem} />;
+        })
+      ) : (
+        <p className="empty-todos">Todo를 추가해주세요🔥</p>
+      )}
     </div>
   );
 };

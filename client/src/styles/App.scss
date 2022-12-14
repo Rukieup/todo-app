@@ -1,0 +1,27 @@
+@import './utility';
+
+* {
+  font-family: 'Noto Sans Korean';
+  margin: 0;
+}
+
+.App {
+  header {
+    background-color: $color-blue;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .left-todos {
+    padding: 0 24px;
+    margin-bottom: 24px;
+    @include notice();
+  }
+
+  .empty-todos {
+    padding: 0 24px;
+    margin-bottom: 24px;
+    text-align: center;
+    @include notice();
+  }
+}
